@@ -266,6 +266,32 @@ typedef enum
 #define ERROR_INVALID_PROFILE_ARB 0x2096
 #define ERROR_INCOMPATIBLE_DEVICE_CONTEXTS_ARB 0x2054
 
+#if WINVER < 0x0601
+#define WM_TOUCH 0x0240
+#define TOUCHEVENTF_MOVE 0x0001
+#define TOUCHEVENTF_DOWN 0x0002
+#define TOUCHEVENTF_UP 0x0004
+#define TOUCH_COORD_TO_PIXEL(x) ((x) / 100)
+DECLARE_HANDLE(HTOUCHINPUT);
+typedef struct
+{
+    LONG x;
+    LONG y;
+    HANDLE hSource;
+    DWORD dwID;
+    DWORD dwFlags;
+    DWORD dwMask;
+    DWORD dwTime;
+    ULONG_PTR dwExtraInfo;
+    DWORD cxContact;
+    DWORD cyContext;
+} TOUCHINPUT;
+#endif /*WINVER < 0x0601*/
+
+// winmm.dll function pointer typedefs
+typedef DWORD (WINAPI * PFN_timeGetTime)(void);
+#define timeGetTime _glfw.win32.winmm.GetTime
+
 // xinput.dll function pointer typedefs
 typedef DWORD (WINAPI * PFN_XInputGetCapabilities)(DWORD,DWORD,XINPUT_CAPABILITIES*);
 typedef DWORD (WINAPI * PFN_XInputGetState)(DWORD,XINPUT_STATE*);
@@ -283,12 +309,20 @@ typedef BOOL (WINAPI * PFN_EnableNonClientDpiScaling)(HWND);
 typedef BOOL (WINAPI * PFN_SetProcessDpiAwarenessContext)(HANDLE);
 typedef UINT (WINAPI * PFN_GetDpiForWindow)(HWND);
 typedef BOOL (WINAPI * PFN_AdjustWindowRectExForDpi)(LPRECT,DWORD,BOOL,DWORD,UINT);
+typedef BOOL (WINAPI * PFN_GetTouchInputInfo)(HTOUCHINPUT,UINT,TOUCHINPUT*,int);
+typedef BOOL (WINAPI * PFN_CloseTouchInputHandle)(HTOUCHINPUT);
+typedef BOOL (WINAPI * PFN_RegisterTouchWindow)(HWND,LONG);
+typedef BOOL (WINAPI * PFN_UnregisterTouchWindow)(HWND);
 #define SetProcessDPIAware _glfw.win32.user32.SetProcessDPIAware_
 #define ChangeWindowMessageFilterEx _glfw.win32.user32.ChangeWindowMessageFilterEx_
 #define EnableNonClientDpiScaling _glfw.win32.user32.EnableNonClientDpiScaling_
 #define SetProcessDpiAwarenessContext _glfw.win32.user32.SetProcessDpiAwarenessContext_
 #define GetDpiForWindow _glfw.win32.user32.GetDpiForWindow_
 #define AdjustWindowRectExForDpi _glfw.win32.user32.AdjustWindowRectExForDpi_
+#define GetTouchInputInfo     _glfw.win32.user32.GetTouchInputInfo_
+#define CloseTouchInputHandle _glfw.win32.user32.CloseTouchInputHandle_
+#define RegisterTouchWindow   _glfw.win32.user32.RegisterTouchWindow_
+#define UnregisterTouchWindow _glfw.win32.user32.UnregisterTouchWindow_
 
 // dwmapi.dll function pointer typedefs
 typedef HRESULT (WINAPI * PFN_DwmIsCompositionEnabled)(BOOL*);
@@ -471,6 +505,10 @@ typedef struct _GLFWlibraryWin32
         PFN_SetProcessDpiAwarenessContext SetProcessDpiAwarenessContext_;
         PFN_GetDpiForWindow             GetDpiForWindow_;
         PFN_AdjustWindowRectExForDpi    AdjustWindowRectExForDpi_;
+        PFN_GetTouchInputInfo           GetTouchInputInfo_;
+        PFN_CloseTouchInputHandle       CloseTouchInputHandle_;
+        PFN_RegisterTouchWindow         RegisterTouchWindow_;
+        PFN_UnregisterTouchWindow       UnregisterTouchWindow_;
     } user32;
 
     struct {
@@ -570,6 +608,8 @@ void _glfwSetWindowOpacityWin32(_GLFWwindow* window, float opacity);
 
 void _glfwSetRawMouseMotionWin32(_GLFWwindow *window, GLFWbool enabled);
 GLFWbool _glfwRawMouseMotionSupportedWin32(void);
+
+void _glfwSetTouchInputWin32(_GLFWwindow* window, int enabled);
 
 void _glfwPollEventsWin32(void);
 void _glfwWaitEventsWin32(void);

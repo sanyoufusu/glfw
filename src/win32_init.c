@@ -91,6 +91,14 @@ static GLFWbool loadLibraries(void)
         _glfwPlatformGetModuleSymbol(_glfw.win32.user32.instance, "GetDpiForWindow");
     _glfw.win32.user32.AdjustWindowRectExForDpi_ = (PFN_AdjustWindowRectExForDpi)
         _glfwPlatformGetModuleSymbol(_glfw.win32.user32.instance, "AdjustWindowRectExForDpi");
+    _glfw.win32.user32.GetTouchInputInfo_ = (PFN_GetTouchInputInfo)
+        _glfwPlatformGetModuleSymbol(_glfw.win32.user32.instance, "GetTouchInputInfo");
+    _glfw.win32.user32.CloseTouchInputHandle_ = (PFN_CloseTouchInputHandle)
+        _glfwPlatformGetModuleSymbol(_glfw.win32.user32.instance, "CloseTouchInputHandle");
+    _glfw.win32.user32.RegisterTouchWindow_ = (PFN_RegisterTouchWindow)
+        _glfwPlatformGetModuleSymbol(_glfw.win32.user32.instance, "RegisterTouchWindow");
+    _glfw.win32.user32.UnregisterTouchWindow_ = (PFN_UnregisterTouchWindow)
+        _glfwPlatformGetModuleSymbol(_glfw.win32.user32.instance, "UnregisterTouchWindow");
 
     _glfw.win32.dinput8.instance = _glfwPlatformLoadModule("dinput8.dll");
     if (_glfw.win32.dinput8.instance)
@@ -548,6 +556,7 @@ GLFWbool _glfwConnectWin32(int platformID, _GLFWplatform* platform)
         _glfwSetCursorModeWin32,
         _glfwSetRawMouseMotionWin32,
         _glfwRawMouseMotionSupportedWin32,
+        _glfwSetTouchInputWin32,
         _glfwCreateCursorWin32,
         _glfwCreateStandardCursorWin32,
         _glfwDestroyCursorWin32,
