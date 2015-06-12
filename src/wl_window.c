@@ -1171,8 +1171,7 @@ GLFWbool _glfwRawMouseMotionSupportedWayland(void)
 
 void _glfwSetTouchInputWayland(_GLFWwindow* window, int enabled)
 {
-    _glfwInputError(GLFW_FEATURE_UNIMPLEMENTED,
-                    "Wayland: Touch input is not yet implemented");
+    _glfw.wl.touchEnabled = enabled;
 }
 
 void _glfwPollEventsWayland(void)

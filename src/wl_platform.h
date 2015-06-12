@@ -278,6 +278,7 @@ typedef struct _GLFWlibraryWayland
     struct wl_seat*             seat;
     struct wl_pointer*          pointer;
     struct wl_keyboard*         keyboard;
+    struct wl_touch*            touch;
     struct wl_data_device_manager*          dataDeviceManager;
     struct wl_data_device*      dataDevice;
     struct wl_data_offer*       dataOffer;
@@ -355,6 +356,11 @@ typedef struct _GLFWlibraryWayland
 
     _GLFWwindow*                pointerFocus;
     _GLFWwindow*                keyboardFocus;
+
+    int*                        touchIDs;
+    _GLFWwindow**               touchFocuses;
+    int                         touchSize;
+    int                         touchEnabled;
 
     struct {
         void*                                       handle;
