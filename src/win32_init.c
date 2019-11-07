@@ -602,6 +602,7 @@ GLFWbool _glfwConnectWin32(int platformID, _GLFWplatform* platform)
         _glfwSetWindowFloatingWin32,
         _glfwSetWindowOpacityWin32,
         _glfwSetWindowMousePassthroughWin32,
+        _glfwGetSystemThemeWin32,
         _glfwPollEventsWin32,
         _glfwWaitEventsWin32,
         _glfwWaitEventsTimeoutWin32,

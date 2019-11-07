@@ -1143,6 +1143,10 @@ extern "C" {
 #define GLFW_ANGLE_PLATFORM_TYPE_VULKAN  0x00037007
 #define GLFW_ANGLE_PLATFORM_TYPE_METAL   0x00037008
 
+#define GLFW_THEME_UNKNOWN          0x00038000
+#define GLFW_THEME_LIGHT            0x00038001
+#define GLFW_THEME_DARK             0x00038002
+
 /*! @defgroup shapes Standard cursor shapes
  *  @brief Standard system cursor shapes.
  *
@@ -4008,6 +4012,10 @@ GLFWAPI void glfwSetWindowUserPointer(GLFWwindow* window, void* pointer);
  *  @ingroup window
  */
 GLFWAPI void* glfwGetWindowUserPointer(GLFWwindow* window);
+
+/*! Words, words, words
+ */
+GLFWAPI int glfwGetSystemTheme(void);
 
 /*! @brief Sets the position callback for the specified window.
  *

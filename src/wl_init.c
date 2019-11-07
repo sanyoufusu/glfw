@@ -1119,6 +1119,7 @@ GLFWbool _glfwConnectWayland(int platformID, _GLFWplatform* platform)
         _glfwSetWindowFloatingWayland,
         _glfwSetWindowOpacityWayland,
         _glfwSetWindowMousePassthroughWayland,
+        _glfwGetSystemThemeWayland,
         _glfwPollEventsWayland,
         _glfwWaitEventsWayland,
         _glfwWaitEventsTimeoutWayland,

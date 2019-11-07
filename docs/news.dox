@@ -35,6 +35,12 @@ are still available.
 For more information see @ref cursor_standard.
 
 
+@subsubsection features_34_system_theme Support for querying the light/dark theme
+
+GLFW now provides a query for whether the system is using a light or dark theme with @ref
+glfwGetSystemTheme.
+
+
 @subsubsection mouse_passthrough_34 Mouse event passthrough
 
 GLFW now provides the [GLFW_MOUSE_PASSTHROUGH](@ref GLFW_MOUSE_PASSTHROUGH_hint)
@@ -168,6 +174,7 @@ then GLFW will fail to initialize.
  - @ref glfwInitAllocator
  - @ref glfwGetPlatform
  - @ref glfwPlatformSupported
+ - @ref glfwGetSystemTheme
 
 
 @subsubsection types_34 New types in version 3.4
@@ -210,6 +217,9 @@ then GLFW will fail to initialize.
  - @ref GLFW_ANGLE_PLATFORM_TYPE_VULKAN
  - @ref GLFW_ANGLE_PLATFORM_TYPE_METAL
  - @ref GLFW_X11_XCB_VULKAN_SURFACE
+ - @ref GLFW_THEME_UNKNOWN
+ - @ref GLFW_THEME_LIGHT
+ - @ref GLFW_THEME_DARK
 
 
 @section news_archive Release notes for earlier versions

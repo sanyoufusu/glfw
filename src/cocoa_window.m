@@ -1378,6 +1378,27 @@ void _glfwSetWindowMousePassthroughCocoa(_GLFWwindow* window, GLFWbool enabled)
     }
 }
 
+int _glfwGetSystemThemeCocoa(void)
+{
+    @autoreleasepool {
+
+    if ([NSAppearance respondsToSelector:@selector(currentAppearance)])
+    {
+        NSAppearanceName name = [[NSAppearance currentAppearance] name];
+        if ([name isEqualToString:NSAppearanceNameDarkAqua] ||
+            [name isEqualToString:NSAppearanceNameVibrantDark] ||
+            [name isEqualToString:NSAppearanceNameAccessibilityHighContrastDarkAqua] ||
+            [name isEqualToString:NSAppearanceNameAccessibilityHighContrastVibrantDark])
+        {
+            return GLFW_THEME_DARK;
+        }
+        else
+            return GLFW_THEME_LIGHT;
+    }
+
+    } // autoreleasepool
+}
+
 float _glfwGetWindowOpacityCocoa(_GLFWwindow* window)
 {
     @autoreleasepool {

@@ -1899,6 +1899,12 @@ void _glfwSetWindowMousePassthroughWin32(_GLFWwindow* window, GLFWbool enabled)
         SetLayeredWindowAttributes(window->win32.handle, key, alpha, flags);
 }
 
+int _glfwGetSystemThemeWin32(void)
+{
+    _glfwInputError(GLFW_FEATURE_UNIMPLEMENTED, "Win32: System theme query not implemented");
+    return GLFW_THEME_UNKNOWN;
+}
+
 float _glfwGetWindowOpacityWin32(_GLFWwindow* window)
 {
     BYTE alpha;

@@ -457,6 +457,7 @@ void _glfwSetWindowFloatingWayland(_GLFWwindow* window, GLFWbool enabled);
 float _glfwGetWindowOpacityWayland(_GLFWwindow* window);
 void _glfwSetWindowOpacityWayland(_GLFWwindow* window, float opacity);
 void _glfwSetWindowMousePassthroughWayland(_GLFWwindow* window, GLFWbool enabled);
+int _glfwGetSystemThemeWayland(void);
 
 void _glfwSetRawMouseMotionWayland(_GLFWwindow *window, GLFWbool enabled);
 GLFWbool _glfwRawMouseMotionSupportedWayland(void);

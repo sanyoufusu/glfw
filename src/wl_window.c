@@ -1135,6 +1135,12 @@ void _glfwSetWindowFloatingWayland(_GLFWwindow* window, GLFWbool enabled)
                     "Wayland: Window attribute setting not implemented yet");
 }
 
+int _glfwGetSystemThemeWayland(void)
+{
+    _glfwInputError(GLFW_FEATURE_UNIMPLEMENTED, "Wayland: System theme query not implemented");
+    return GLFW_THEME_UNKNOWN;
+}
+
 void _glfwSetWindowMousePassthroughWayland(_GLFWwindow* window, GLFWbool enabled)
 {
     if (enabled)

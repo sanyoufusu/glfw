@@ -102,6 +102,7 @@ GLFWbool _glfwConnectNull(int platformID, _GLFWplatform* platform)
         _glfwSetWindowFloatingNull,
         _glfwSetWindowOpacityNull,
         _glfwSetWindowMousePassthroughNull,
+        _glfwGetSystemThemeNull,
         _glfwPollEventsNull,
         _glfwWaitEventsNull,
         _glfwWaitEventsTimeoutNull,

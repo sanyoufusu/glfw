@@ -979,6 +979,12 @@ GLFWAPI void* glfwGetWindowUserPointer(GLFWwindow* handle)
     return window->userPointer;
 }
 
+GLFWAPI int glfwGetSystemTheme(void)
+{
+    _GLFW_REQUIRE_INIT_OR_RETURN(0);
+    return _glfw.platform.getSystemTheme();
+}
+
 GLFWAPI GLFWwindowposfun glfwSetWindowPosCallback(GLFWwindow* handle,
                                                   GLFWwindowposfun cbfun)
 {

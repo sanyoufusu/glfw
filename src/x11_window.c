@@ -2723,6 +2723,12 @@ void _glfwSetWindowMousePassthroughX11(_GLFWwindow* window, GLFWbool enabled)
     }
 }
 
+int _glfwGetSystemThemeX11(void)
+{
+    _glfwInputError(GLFW_FEATURE_UNIMPLEMENTED, "X11: System theme query not implemented");
+    return GLFW_THEME_UNKNOWN;
+}
+
 float _glfwGetWindowOpacityX11(_GLFWwindow* window)
 {
     float opacity = 1.f;

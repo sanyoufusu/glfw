@@ -1183,6 +1183,7 @@ GLFWbool _glfwConnectX11(int platformID, _GLFWplatform* platform)
         _glfwSetWindowFloatingX11,
         _glfwSetWindowOpacityX11,
         _glfwSetWindowMousePassthroughX11,
+        _glfwGetSystemThemeX11,
         _glfwPollEventsX11,
         _glfwWaitEventsX11,
         _glfwWaitEventsTimeoutX11,

@@ -381,6 +381,12 @@ void _glfwSetWindowMousePassthroughNull(_GLFWwindow* window, GLFWbool enabled)
 {
 }
 
+int _glfwGetSystemThemeNull(void)
+{
+    _glfwInputError(GLFW_FEATURE_UNIMPLEMENTED, "Null: System theme query not implemented");
+    return GLFW_THEME_UNKNOWN;
+}
+
 float _glfwGetWindowOpacityNull(_GLFWwindow* window)
 {
     return window->null.opacity;
