@@ -1214,6 +1214,12 @@ void _glfwPlatformSetCursorPos(_GLFWwindow* window, double x, double y)
 
 void _glfwPlatformSetCursorMode(_GLFWwindow* window, int mode)
 {
+    if (mode == GLFW_CURSOR_CAPTURED)
+    {
+        _glfwInputError(GLFW_FEATURE_UNIMPLEMENTED,
+                        "Wayland: Captured cursor mode not yet implemented");
+    }
+
     _glfwPlatformSetCursor(window, window->wl.currentCursor);
 }
 

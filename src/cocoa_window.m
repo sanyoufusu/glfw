@@ -1524,6 +1524,12 @@ void _glfwPlatformSetCursorPos(_GLFWwindow* window, double x, double y)
 void _glfwPlatformSetCursorMode(_GLFWwindow* window, int mode)
 {
     @autoreleasepool {
+    if (mode == GLFW_CURSOR_CAPTURED)
+    {
+        _glfwInputError(GLFW_FEATURE_UNIMPLEMENTED,
+                        "Cocoa: Captured cursor mode not yet implemented");
+    }
+
     if (_glfwPlatformWindowFocused(window))
         updateCursorMode(window);
     } // autoreleasepool
