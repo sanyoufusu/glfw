@@ -103,6 +103,16 @@ void _glfwPlatformGetMonitorWorkarea(_GLFWmonitor* monitor,
         *height = mode.height - 10;
 }
 
+void _glfwPlatformGetMonitorFramebufferSize(_GLFWmonitor* monitor,
+                                            int* width, int* height)
+{
+    const GLFWvidmode mode = getVideoMode();
+    if (width)
+        *width = mode.width;
+    if (height)
+        *height = mode.height;
+}
+
 GLFWvidmode* _glfwPlatformGetVideoModes(_GLFWmonitor* monitor, int* found)
 {
     GLFWvidmode* mode = calloc(1, sizeof(GLFWvidmode));

@@ -383,6 +383,18 @@ void _glfwPlatformGetMonitorWorkarea(_GLFWmonitor* monitor,
         *height = mi.rcWork.bottom - mi.rcWork.top;
 }
 
+void _glfwPlatformGetMonitorFramebufferSize(_GLFWmonitor* monitor,
+                                            int* width, int* height)
+{
+    MONITORINFO mi = { sizeof(mi) };
+    GetMonitorInfo(monitor->win32.handle, &mi);
+
+    if (width)
+        *width = mi.rcMonitor.right - mi.rcMonitor.left;
+    if (height)
+        *height = mi.rcMonitor.bottom - mi.rcMonitor.top;
+}
+
 GLFWvidmode* _glfwPlatformGetVideoModes(_GLFWmonitor* monitor, int* count)
 {
     int modeIndex = 0, size = 0;

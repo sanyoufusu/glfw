@@ -388,6 +388,21 @@ GLFWAPI void glfwGetMonitorContentScale(GLFWmonitor* handle,
     _glfwPlatformGetMonitorContentScale(monitor, xscale, yscale);
 }
 
+GLFWAPI void glfwGetMonitorFramebufferSize(GLFWmonitor* handle,
+                                           int* width, int* height)
+{
+    _GLFWmonitor* monitor = (_GLFWmonitor*) handle;
+    assert(monitor != NULL);
+
+    if (width)
+        *width = 0;
+    if (height)
+        *height = 0;
+
+    _GLFW_REQUIRE_INIT();
+    _glfwPlatformGetMonitorFramebufferSize(monitor, width, height);
+}
+
 GLFWAPI const char* glfwGetMonitorName(GLFWmonitor* handle)
 {
     _GLFWmonitor* monitor = (_GLFWmonitor*) handle;

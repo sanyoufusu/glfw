@@ -437,6 +437,48 @@ void _glfwPlatformGetMonitorWorkarea(_GLFWmonitor* monitor, int* xpos, int* ypos
         *height = areaHeight;
 }
 
+void _glfwPlatformGetMonitorFramebufferSize(_GLFWmonitor* monitor,
+                                            int* width, int* height)
+{
+    if (_glfw.x11.randr.available && !_glfw.x11.randr.monitorBroken)
+    {
+        XRRScreenResources* sr =
+            XRRGetScreenResourcesCurrent(_glfw.x11.display, _glfw.x11.root);
+
+        XRRCrtcInfo* ci = XRRGetCrtcInfo(_glfw.x11.display, sr, monitor->x11.crtc);
+        if (ci)
+        {
+            const XRRModeInfo* mi = getModeInfo(sr, ci->mode);
+            if (mi)  // mi can be NULL if the monitor has been disconnected
+            {
+                if (ci->rotation == RR_Rotate_90 || ci->rotation == RR_Rotate_270)
+                {
+                    if (width)
+                        *width  = mi->height;
+                    if (height)
+                        *height = mi->width;
+                }
+                else
+                {
+                    if (width)
+                        *width  = mi->width;
+                    if (height)
+                        *height = mi->height;
+                }
+            }
+
+            XRRFreeCrtcInfo(ci);
+        }
+
+        XRRFreeScreenResources(sr);
+    }
+    else
+    {
+        *width = DisplayWidth(_glfw.x11.display, _glfw.x11.screen);
+        *height = DisplayHeight(_glfw.x11.display, _glfw.x11.screen);
+    }
+}
+
 GLFWvidmode* _glfwPlatformGetVideoModes(_GLFWmonitor* monitor, int* count)
 {
     GLFWvidmode* result;

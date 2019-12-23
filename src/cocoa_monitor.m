@@ -513,6 +513,15 @@ void _glfwPlatformGetMonitorWorkarea(_GLFWmonitor* monitor,
     } // autoreleasepool
 }
 
+void _glfwPlatformwGetMonitorFramebufferSize(_GLFWmonitor* monitor,
+                                             int* width, int* height)
+{
+    if (width)
+        *width = CGDisplayPixelsWide(monitor->ns.displayID);
+    if (height)
+        *height = CGDisplayPixelsHigh(monitor->ns.displayID);
+}
+
 GLFWvidmode* _glfwPlatformGetVideoModes(_GLFWmonitor* monitor, int* count)
 {
     @autoreleasepool {

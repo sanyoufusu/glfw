@@ -192,6 +192,15 @@ void _glfwPlatformGetMonitorWorkarea(_GLFWmonitor* monitor,
         *height = monitor->modes[monitor->wl.currentMode].height;
 }
 
+void _glfwPlatformGetMonitorFramebufferSize(_GLFWmonitor* monitor,
+                                            int* width, int* height)
+{
+    if (width)
+        *width = monitor->modes[monitor->wl.currentMode].width;
+    if (height)
+        *height = monitor->modes[monitor->wl.currentMode].height;
+}
+
 GLFWvidmode* _glfwPlatformGetVideoModes(_GLFWmonitor* monitor, int* found)
 {
     *found = monitor->modeCount;

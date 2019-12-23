@@ -27,6 +27,11 @@ are still available.
 For more information see @ref cursor_standard.
 
 
+@subsubsection monitor_fbsize_34 Monitor framebuffer size
+
+
+
+
 @subsubsection mouse_passthrough_34 Mouse event passthrough
 
 GLFW now provides the [GLFW_MOUSE_PASSTHROUGH](@ref GLFW_MOUSE_PASSTHROUGH_hint)
@@ -118,6 +123,10 @@ then GLFW will fail to initialize.
 @subsection symbols_34 New symbols in version 3.4
 
 @subsubsection functions_34 New functions in version 3.4
+
+ - @ref glfwGetMonitorFramebufferSize
+
+
 @subsubsection types_34 New types in version 3.4
 @subsubsection constants_34 New constants in version 3.4
 

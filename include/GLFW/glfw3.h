@@ -2314,6 +2314,28 @@ GLFWAPI void glfwGetMonitorPhysicalSize(GLFWmonitor* monitor, int* widthMM, int*
  */
 GLFWAPI void glfwGetMonitorContentScale(GLFWmonitor* monitor, float* xscale, float* yscale);
 
+/*! @brief Retrieves the resolution in pixels of the specified monitor.
+ *
+ *  This function retrieves the size, in pixels, of the framebuffer of the
+ *  specified monitor.
+ *
+ *  @param[in] monitor The monitor whose framebuffer to query.
+ *  @param[out] width Where to store the width, in pixels, of the framebuffer,
+ *  or `NULL`.
+ *  @param[out] height Where to store the height, in pixels, of the framebuffer,
+ *  or `NULL`.
+ *
+ *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED and @ref
+ *  GLFW_PLATFORM_ERROR.
+ *
+ *  @thread_safety This function must only be called from the main thread.
+ *
+ *  @since Added in version 3.4.
+ *
+ *  @ingroup monitor
+ */
+GLFWAPI void glfwGetMonitorFramebufferSize(GLFWmonitor* monitor, int* width, int* height);
+
 /*! @brief Returns the name of the specified monitor.
  *
  *  This function returns a human-readable name, encoded as UTF-8, of the

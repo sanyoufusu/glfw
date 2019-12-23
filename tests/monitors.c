@@ -93,7 +93,7 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 
 static void list_modes(GLFWmonitor* monitor)
 {
-    int count, x, y, width_mm, height_mm, i;
+    int count, x, y, fb_width, fb_height, width_mm, height_mm, i;
     int workarea_x, workarea_y, workarea_width, workarea_height;
     float xscale, yscale;
 
@@ -104,11 +104,13 @@ static void list_modes(GLFWmonitor* monitor)
     glfwGetMonitorPhysicalSize(monitor, &width_mm, &height_mm);
     glfwGetMonitorContentScale(monitor, &xscale, &yscale);
     glfwGetMonitorWorkarea(monitor, &workarea_x, &workarea_y, &workarea_width, &workarea_height);
+    glfwGetMonitorFramebufferSize(monitor, &fb_width, &fb_height);
 
     printf("Name: %s (%s)\n",
            glfwGetMonitorName(monitor),
            glfwGetPrimaryMonitor() == monitor ? "primary" : "secondary");
     printf("Current mode: %s\n", format_mode(mode));
+    printf("Current framebuffer: %i x %i\n", fb_width, fb_height);
     printf("Virtual position: %i, %i\n", x, y);
     printf("Content scale: %f x %f\n", xscale, yscale);
 
