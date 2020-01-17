@@ -2199,7 +2199,7 @@ void _glfwPlatformSetCursor(_GLFWwindow* window, _GLFWcursor* cursor)
 
 void _glfwPlatformSetClipboardString(const char* string)
 {
-    int characterCount;
+    int characterCount, tries = 0;
     HANDLE object;
     WCHAR* buffer;
 
@@ -2227,12 +2227,21 @@ void _glfwPlatformSetClipboardString(const char* string)
     MultiByteToWideChar(CP_UTF8, 0, string, -1, buffer, characterCount);
     GlobalUnlock(object);
 
-    if (!OpenClipboard(_glfw.win32.helperWindowHandle))
+    // HACK: Retry clipboard opening a few times as some other application may
+    //       have it open and also the Windows 10 Clipboard History (if enabled)
+    //       fetches data after each update
+    while (!OpenClipboard(_glfw.win32.helperWindowHandle))
     {
-        _glfwInputErrorWin32(GLFW_PLATFORM_ERROR,
-                             "Win32: Failed to open clipboard");
-        GlobalFree(object);
-        return;
+        Sleep(1);
+        tries++;
+
+        if (tries == 3)
+        {
+            _glfwInputErrorWin32(GLFW_PLATFORM_ERROR,
+                                 "Win32: Failed to open clipboard");
+            GlobalFree(object);
+            return;
+        }
     }
 
     EmptyClipboard();
@@ -2244,12 +2253,29 @@ const char* _glfwPlatformGetClipboardString(void)
 {
     HANDLE object;
     WCHAR* buffer;
+    int tries = 0;
 
-    if (!OpenClipboard(_glfw.win32.helperWindowHandle))
+    if (!IsClipboardFormatAvailable(CF_UNICODETEXT))
     {
-        _glfwInputErrorWin32(GLFW_PLATFORM_ERROR,
-                             "Win32: Failed to open clipboard");
+        _glfwInputError(GLFW_FORMAT_UNAVAILABLE,
+                        "Win32: Clipboard does not contain a string");
         return NULL;
+    }
+
+    // HACK: Retry clipboard opening a few times as some other application may
+    //       have it open and also the Windows 10 Clipboard History (if enabled)
+    //       fetches data after each update
+    while (!OpenClipboard(_glfw.win32.helperWindowHandle))
+    {
+        Sleep(1);
+        tries++;
+
+        if (tries == 3)
+        {
+            _glfwInputErrorWin32(GLFW_PLATFORM_ERROR,
+                                 "Win32: Failed to open clipboard");
+            return NULL;
+        }
     }
 
     object = GetClipboardData(CF_UNICODETEXT);

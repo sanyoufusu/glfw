@@ -170,6 +170,8 @@ information on what to include when reporting a bug.
  - [Win32] Bugfix: `USE_MSVC_RUNTIME_LIBRARY_DLL` had no effect on CMake 3.15 or
    later (#1783,#1796)
  - [Win32] Bugfix: Compilation with LLVM for Windows failed (#1807,#1824,#1874)
+ - [Win32] Bugfix: Rapid clipboard queries and/or updates could fail due to
+   Clipboard History
  - [Cocoa] Added support for `VK_EXT_metal_surface` (#1619)
  - [Cocoa] Added locating the Vulkan loader at runtime in an application bundle
  - [Cocoa] Moved main menu creation to GLFW initialization time (#1649)
