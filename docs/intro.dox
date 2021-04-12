@@ -361,6 +361,7 @@ from any thread, but the window object is not synchronized by GLFW.
  - @ref glfwSwapInterval
  - @ref glfwExtensionSupported
  - @ref glfwGetProcAddress
+ - @ref glfwGetFramebufferSize
 
 The raw timer functions may be called from any thread.
 

@@ -3209,7 +3209,8 @@ GLFWAPI void glfwSetWindowSize(GLFWwindow* window, int width, int height);
  *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED and @ref
  *  GLFW_PLATFORM_ERROR.
  *
- *  @thread_safety This function must only be called from the main thread.
+ *  @thread_safety This function may be called from any thread.  The window
+ *  object is not synchronized.
  *
  *  @sa @ref window_fbsize
  *  @sa @ref glfwSetFramebufferSizeCallback

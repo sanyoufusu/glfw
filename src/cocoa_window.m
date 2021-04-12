@@ -1092,13 +1092,23 @@ void _glfwPlatformGetFramebufferSize(_GLFWwindow* window, int* width, int* heigh
 {
     @autoreleasepool {
 
-    const NSRect contentRect = [window->ns.view frame];
-    const NSRect fbRect = [window->ns.view convertRectToBacking:contentRect];
+    if ([NSThread isMainThread])
+    {
+        const NSRect contentRect = [window->ns.view frame];
+        const NSRect fbRect = [window->ns.view convertRectToBacking:contentRect];
 
-    if (width)
-        *width = (int) fbRect.size.width;
-    if (height)
-        *height = (int) fbRect.size.height;
+        if (width)
+            *width = (int) fbRect.size.width;
+        if (height)
+            *height = (int) fbRect.size.height;
+    }
+    else
+    {
+        if (width)
+            *width = window->ns.fbWidth;
+        if (height)
+            *height = window->ns.fbHeight;
+    }
 
     } // autoreleasepool
 }
