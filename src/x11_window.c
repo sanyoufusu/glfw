@@ -240,6 +240,11 @@ static void sendEventToWM(_GLFWwindow* window, Atom type,
 static void updateNormalHints(_GLFWwindow* window, int width, int height)
 {
     XSizeHints* hints = XAllocSizeHints();
+    if (!hints)
+    {
+        _glfwInputError(GLFW_OUT_OF_MEMORY, "X11: Failed to allocate size hints");
+        return;
+    }
 
     long supplied;
     XGetWMNormalHints(_glfw.x11.display, window->x11.handle, hints, &supplied);
@@ -762,6 +767,11 @@ static GLFWbool createNativeWindow(_GLFWwindow* window,
     // Set ICCCM WM_CLASS property
     {
         XClassHint* hint = XAllocClassHint();
+        if (!hint)
+        {
+            _glfwInputError(GLFW_OUT_OF_MEMORY, "X11: Failed to allocate class hint");
+            return GLFW_FALSE;
+        }
 
         if (strlen(wndconfig->x11.instanceName) &&
             strlen(wndconfig->x11.className))
@@ -2185,6 +2195,11 @@ void _glfwSetWindowPosX11(_GLFWwindow* window, int xpos, int ypos)
     {
         long supplied;
         XSizeHints* hints = XAllocSizeHints();
+        if (!hints)
+        {
+            _glfwInputError(GLFW_OUT_OF_MEMORY, "X11: Failed to allocate size hints");
+            return;
+        }
 
         if (XGetWMNormalHints(_glfw.x11.display, window->x11.handle, hints, &supplied))
         {
