@@ -395,6 +395,8 @@ struct _GLFWinitconfig
 //
 struct _GLFWwndconfig
 {
+    int           xpos;
+    int           ypos;
     int           width;
     int           height;
     const char*   title;

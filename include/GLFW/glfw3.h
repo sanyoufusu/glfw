@@ -928,6 +928,18 @@ extern "C" {
  */
 #define GLFW_MOUSE_PASSTHROUGH      0x0002000D
 
+/*! @brief Initial position x-coordinate window hint.
+ *
+ *  Initial position x-coordinate [window hint](@ref GLFW_POSITION_X).
+ */
+#define GLFW_POSITION_X             0x0002000E
+
+/*! @brief Initial position y-coordinate window hint.
+ *
+ *  Initial position y-coordinate [window hint](@ref GLFW_POSITION_Y).
+ */
+#define GLFW_POSITION_Y             0x0002000F
+
 /*! @brief Framebuffer bit depth hint.
  *
  *  Framebuffer bit depth [hint](@ref GLFW_RED_BITS).
@@ -1145,6 +1157,8 @@ extern "C" {
 #define GLFW_ANGLE_PLATFORM_TYPE_D3D11   0x00037005
 #define GLFW_ANGLE_PLATFORM_TYPE_VULKAN  0x00037007
 #define GLFW_ANGLE_PLATFORM_TYPE_METAL   0x00037008
+
+#define GLFW_ANY_POSITION           0x80000000
 
 /*! @defgroup shapes Standard cursor shapes
  *  @brief Standard system cursor shapes.
