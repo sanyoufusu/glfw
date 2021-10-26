@@ -809,7 +809,19 @@ static GLFWbool createNativeWindow(_GLFWwindow* window,
         contentRect = NSMakeRect(xpos, ypos, mode.width, mode.height);
     }
     else
-        contentRect = NSMakeRect(0, 0, wndconfig->width, wndconfig->height);
+    {
+        if (wndconfig->xpos == GLFW_ANY_POSITION ||
+            wndconfig->ypos == GLFW_ANY_POSITION)
+        {
+            contentRect = NSMakeRect(0, 0, wndconfig->width, wndconfig->height);
+        }
+        else
+        {
+            const int xpos = wndconfig->xpos;
+            const int ypos = _glfwTransformYCocoa(wndconfig->ypos + wndconfig->height - 1);
+            contentRect = NSMakeRect(xpos, ypos, wndconfig->width, wndconfig->height);
+        }
+    }
 
     window->ns.object = [[GLFWWindow alloc]
         initWithContentRect:contentRect
@@ -827,10 +839,14 @@ static GLFWbool createNativeWindow(_GLFWwindow* window,
         [window->ns.object setLevel:NSMainMenuWindowLevel + 1];
     else
     {
-        [(NSWindow*) window->ns.object center];
-        _glfw.ns.cascadePoint =
-            NSPointToCGPoint([window->ns.object cascadeTopLeftFromPoint:
-                              NSPointFromCGPoint(_glfw.ns.cascadePoint)]);
+        if (wndconfig->xpos == GLFW_ANY_POSITION ||
+            wndconfig->ypos == GLFW_ANY_POSITION)
+        {
+            [(NSWindow*) window->ns.object center];
+            _glfw.ns.cascadePoint =
+                NSPointToCGPoint([window->ns.object cascadeTopLeftFromPoint:
+                                NSPointFromCGPoint(_glfw.ns.cascadePoint)]);
+        }
 
         if (wndconfig->resizable)
         {
